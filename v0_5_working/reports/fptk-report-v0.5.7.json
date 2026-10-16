@@ -1,0 +1,744 @@
+{
+  "tool": "FPTK",
+  "version": "0.5.7",
+  "start_url": "http://127.0.0.1:5000/",
+  "scope": {
+    "type": "local training lab",
+    "allowed_origin": "http://127.0.0.1:5000",
+    "external_targets_scanned": false
+  },
+  "summary": {
+    "discovered_pages": 11,
+    "discovered_forms": 0,
+    "xss_tests_run": 5,
+    "sqli_tests_run": 4,
+    "potential_findings": 4,
+    "confirmed_vulnerabilities": 0,
+    "discovery_errors": 0,
+    "xss_errors": 0,
+    "sqli_errors": 0
+  },
+  "findings": [
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "parameter": "term",
+      "classification": "potential_html_injection",
+      "status": "potential_finding",
+      "confirmed_vulnerability": false,
+      "evidence": {
+        "raw_reflected": true,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": true,
+        "attribute_contexts": [],
+        "text_contexts": [],
+        "classification": "potential_html_injection",
+        "explanation": "The marker was parsed as an HTML element. This suggests raw HTML interpretation, but does not establish executable XSS.",
+        "confirmed_vulnerability": false
+      },
+      "note": "HTML reflection/context signal only; JavaScript execution was not tested."
+    },
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+      "parameter": "term",
+      "classification": "raw_reflection_in_attribute",
+      "status": "potential_finding",
+      "confirmed_vulnerability": false,
+      "evidence": {
+        "raw_reflected": true,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": false,
+        "attribute_contexts": [
+          {
+            "element": "input",
+            "attribute": "value"
+          }
+        ],
+        "text_contexts": [],
+        "classification": "raw_reflection_in_attribute",
+        "explanation": "The raw marker occurs in one or more HTML attribute values. Risk depends on the attribute and its context.",
+        "confirmed_vulnerability": false
+      },
+      "note": "HTML reflection/context signal only; JavaScript execution was not tested."
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable",
+      "classification": "potential_sql_injection",
+      "status": "potential_finding",
+      "confirmed_vulnerability": false,
+      "evidence": {
+        "signals": [
+          "unexpected_match_count_increase"
+        ],
+        "baseline": {
+          "status_code": 200,
+          "match_count": 0
+        },
+        "quote_test": {
+          "status_code": 400,
+          "sql_error_signal": false
+        },
+        "boolean_test": {
+          "status_code": 200,
+          "match_count": 2
+        }
+      },
+      "note": "Heuristic SQL error/response-difference signal; review the evidence before drawing conclusions."
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix",
+      "classification": "potential_sql_injection",
+      "status": "potential_finding",
+      "confirmed_vulnerability": false,
+      "evidence": {
+        "signals": [
+          "unexpected_match_count_increase"
+        ],
+        "baseline": {
+          "status_code": 200,
+          "match_count": 0
+        },
+        "quote_test": {
+          "status_code": 400,
+          "sql_error_signal": false
+        },
+        "boolean_test": {
+          "status_code": 200,
+          "match_count": 2
+        }
+      },
+      "note": "Heuristic SQL error/response-difference signal; review the evidence before drawing conclusions."
+    }
+  ],
+  "evaluation": {
+    "evaluation_version": "0.5.6",
+    "input_reports": {
+      "xss": "C:\\Users\\User\\Desktop\\webapp_fptk_starter\\v0_5_working\\reports\\xss-analysis-v0.5.7.json",
+      "sqli": "C:\\Users\\User\\Desktop\\webapp_fptk_starter\\v0_5_working\\reports\\sqli-analysis-v0.5.7.json"
+    },
+    "reference_label_source": "Known labels for the project's constructed local training lab",
+    "overall_metrics": {
+      "total": 9,
+      "true_positives": 4,
+      "false_positives": 0,
+      "true_negatives": 5,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1_score": 1.0
+    },
+    "category_metrics": {
+      "XSS": {
+        "total": 5,
+        "true_positives": 2,
+        "false_positives": 0,
+        "true_negatives": 3,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "f1_score": 1.0
+      },
+      "SQLi": {
+        "total": 4,
+        "true_positives": 2,
+        "false_positives": 0,
+        "true_negatives": 2,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    "test_details": [
+      {
+        "category": "XSS",
+        "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+        "expected": "vulnerable",
+        "predicted": "vulnerable",
+        "classification": "potential_html_injection",
+        "correct": true
+      },
+      {
+        "category": "XSS",
+        "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+        "expected": "secure",
+        "predicted": "secure",
+        "classification": "escaped_reflection",
+        "correct": true
+      },
+      {
+        "category": "XSS",
+        "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+        "expected": "vulnerable",
+        "predicted": "vulnerable",
+        "classification": "raw_reflection_in_attribute",
+        "correct": true
+      },
+      {
+        "category": "XSS",
+        "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+        "expected": "secure",
+        "predicted": "secure",
+        "classification": "escaped_reflection",
+        "correct": true
+      },
+      {
+        "category": "XSS",
+        "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+        "expected": "secure",
+        "predicted": "secure",
+        "classification": "not_reflected",
+        "correct": true
+      },
+      {
+        "category": "SQLi",
+        "url": "http://127.0.0.1:5000/lab/sqli/vulnerable",
+        "expected": "vulnerable",
+        "predicted": "vulnerable",
+        "classification": "potential_sql_injection",
+        "correct": true
+      },
+      {
+        "category": "SQLi",
+        "url": "http://127.0.0.1:5000/lab/sqli/secure",
+        "expected": "secure",
+        "predicted": "secure",
+        "classification": "no_sql_injection_signal_observed",
+        "correct": true
+      },
+      {
+        "category": "SQLi",
+        "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix",
+        "expected": "vulnerable",
+        "predicted": "vulnerable",
+        "classification": "potential_sql_injection",
+        "correct": true
+      },
+      {
+        "category": "SQLi",
+        "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix",
+        "expected": "secure",
+        "predicted": "secure",
+        "classification": "no_sql_injection_signal_observed",
+        "correct": true
+      }
+    ],
+    "limitations": [
+      "This is a small, hand-built local lab evaluation.",
+      "Reference labels are not independent real-world validation.",
+      "Unknown XSS routes are excluded rather than assigned guessed labels.",
+      "A detector classification is a heuristic, not proof of exploitability.",
+      "These results are not directly comparable to v0.4 unless the same cases, labels, and evaluation rules are used."
+    ]
+  },
+  "stage_reports": {
+    "discovery": "discovery-report-v0.5.7.json",
+    "xss": "xss-analysis-v0.5.7.json",
+    "sqli": "sqli-analysis-v0.5.7.json",
+    "evaluation_json": "evaluation-v0.5.7.json",
+    "evaluation_csv": "evaluation-details-v0.5.7.csv"
+  },
+  "stage_results": {
+    "discovery": {
+      "scanner_version": "0.5.1",
+      "start_url": "http://127.0.0.1:5000/",
+      "pages_visited": 11,
+      "page_count": 11,
+      "form_count": 0,
+      "link_count": 5,
+      "pages": [
+        {
+          "url": "http://127.0.0.1:5000/",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "hello"
+            }
+          ],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "hello"
+            }
+          ],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "hello"
+            }
+          ],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "hello"
+            }
+          ],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+          "status_code": 200,
+          "content_type": "text/html; charset=utf-8",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "hello"
+            }
+          ],
+          "kind": "html_page"
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice",
+          "status_code": 200,
+          "content_type": "application/json",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "alice"
+            }
+          ],
+          "kind": "json_endpoint",
+          "json_keys": [
+            "matches",
+            "route"
+          ]
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/secure?term=alice",
+          "status_code": 200,
+          "content_type": "application/json",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "alice"
+            }
+          ],
+          "kind": "json_endpoint",
+          "json_keys": [
+            "matches",
+            "route"
+          ]
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix?term=alice",
+          "status_code": 200,
+          "content_type": "application/json",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "alice"
+            }
+          ],
+          "kind": "json_endpoint",
+          "json_keys": [
+            "matches",
+            "route"
+          ]
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix?term=alice",
+          "status_code": 200,
+          "content_type": "application/json",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "alice"
+            }
+          ],
+          "kind": "json_endpoint",
+          "json_keys": [
+            "matches",
+            "route"
+          ]
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/noisy?term=alice",
+          "status_code": 200,
+          "content_type": "application/json",
+          "query_parameters": [
+            {
+              "name": "term",
+              "value": "alice"
+            }
+          ],
+          "kind": "json_endpoint",
+          "json_keys": [
+            "message",
+            "results"
+          ]
+        }
+      ],
+      "forms": [],
+      "links": [
+        {
+          "source": "http://127.0.0.1:5000/",
+          "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice"
+        },
+        {
+          "source": "http://127.0.0.1:5000/",
+          "url": "http://127.0.0.1:5000/lab/sqli/secure?term=alice"
+        },
+        {
+          "source": "http://127.0.0.1:5000/",
+          "url": "http://127.0.0.1:5000/lab/sqli/noisy?term=alice"
+        },
+        {
+          "source": "http://127.0.0.1:5000/",
+          "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello"
+        },
+        {
+          "source": "http://127.0.0.1:5000/",
+          "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello"
+        }
+      ],
+      "errors": [],
+      "limitations": [
+        "Only pages reachable through HTML links are crawled automatically.",
+        "Unlinked endpoints must be supplied as route seeds.",
+        "Forms are recorded but never submitted.",
+        "Only GET requests are sent.",
+        "Redirects are not followed.",
+        "Discovery does not confirm vulnerabilities."
+      ]
+    },
+    "xss": {
+      "scanner_version": "0.5.4",
+      "start_url": "http://127.0.0.1:5000/",
+      "tests_run": 5,
+      "errors": [],
+      "results": [
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+          "parameter": "term",
+          "baseline": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 91,
+            "elapsed_ms": 3.05
+          },
+          "test": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 100,
+            "elapsed_ms": 1.99
+          },
+          "analysis": {
+            "raw_reflected": true,
+            "escaped_reflected": false,
+            "parsed_as_html_tag": true,
+            "attribute_contexts": [],
+            "text_contexts": [],
+            "classification": "potential_html_injection",
+            "explanation": "The marker was parsed as an HTML element. This suggests raw HTML interpretation, but does not establish executable XSS.",
+            "confirmed_vulnerability": false
+          },
+          "evidence": {
+            "status_changed": false,
+            "body_length_changed": true
+          },
+          "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+          "parameter": "term",
+          "baseline": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 91,
+            "elapsed_ms": 1.7
+          },
+          "test": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 106,
+            "elapsed_ms": 2.08
+          },
+          "analysis": {
+            "raw_reflected": false,
+            "escaped_reflected": true,
+            "parsed_as_html_tag": false,
+            "attribute_contexts": [],
+            "text_contexts": [
+              {
+                "parent_element": "div"
+              }
+            ],
+            "classification": "escaped_reflection",
+            "explanation": "The escaped marker appears in the response, consistent with HTML output encoding.",
+            "confirmed_vulnerability": false
+          },
+          "evidence": {
+            "status_changed": false,
+            "body_length_changed": true
+          },
+          "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+          "parameter": "term",
+          "baseline": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 74,
+            "elapsed_ms": 2.09
+          },
+          "test": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 83,
+            "elapsed_ms": 1.93
+          },
+          "analysis": {
+            "raw_reflected": true,
+            "escaped_reflected": false,
+            "parsed_as_html_tag": false,
+            "attribute_contexts": [
+              {
+                "element": "input",
+                "attribute": "value"
+              }
+            ],
+            "text_contexts": [],
+            "classification": "raw_reflection_in_attribute",
+            "explanation": "The raw marker occurs in one or more HTML attribute values. Risk depends on the attribute and its context.",
+            "confirmed_vulnerability": false
+          },
+          "evidence": {
+            "status_changed": false,
+            "body_length_changed": true
+          },
+          "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+          "parameter": "term",
+          "baseline": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 74,
+            "elapsed_ms": 1.86
+          },
+          "test": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 89,
+            "elapsed_ms": 18.2
+          },
+          "analysis": {
+            "raw_reflected": false,
+            "escaped_reflected": true,
+            "parsed_as_html_tag": false,
+            "attribute_contexts": [
+              {
+                "element": "input",
+                "attribute": "value"
+              }
+            ],
+            "text_contexts": [],
+            "classification": "escaped_reflection",
+            "explanation": "The escaped marker appears in the response, consistent with HTML output encoding.",
+            "confirmed_vulnerability": false
+          },
+          "evidence": {
+            "status_changed": false,
+            "body_length_changed": true
+          },
+          "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+          "parameter": "term",
+          "baseline": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 101,
+            "elapsed_ms": 15.69
+          },
+          "test": {
+            "status_code": 200,
+            "content_type": "text/html; charset=utf-8",
+            "body_length": 101,
+            "elapsed_ms": 15.1
+          },
+          "analysis": {
+            "raw_reflected": false,
+            "escaped_reflected": false,
+            "parsed_as_html_tag": false,
+            "attribute_contexts": [],
+            "text_contexts": [],
+            "classification": "not_reflected",
+            "explanation": "Neither the raw marker nor its escaped form was found in the response.",
+            "confirmed_vulnerability": false
+          },
+          "evidence": {
+            "status_changed": false,
+            "body_length_changed": false
+          },
+          "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+        }
+      ],
+      "limitations": [
+        "Only discovered query parameters on /lab/xss/ routes are tested.",
+        "The marker is a harmless custom HTML tag.",
+        "Reflection classifications are not confirmed vulnerabilities.",
+        "JavaScript execution and browser behavior are not tested.",
+        "Only loopback HTTP targets are allowed."
+      ]
+    },
+    "sqli": {
+      "scanner_version": "0.5.5",
+      "target": "http://127.0.0.1:5000",
+      "tests_run": 4,
+      "errors": [],
+      "results": [
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/vulnerable",
+          "route_type": "equality",
+          "expected_lab_label": "vulnerable",
+          "baseline": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "quote_test": {
+            "status_code": 400,
+            "sql_error_signal": false
+          },
+          "boolean_test": {
+            "status_code": 200,
+            "match_count": 2
+          },
+          "signals": [
+            "unexpected_match_count_increase"
+          ],
+          "boolean_response_difference": true,
+          "classification": "potential_sql_injection",
+          "confirmed_vulnerability": false,
+          "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/secure",
+          "route_type": "equality",
+          "expected_lab_label": "secure",
+          "baseline": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "quote_test": {
+            "status_code": 200,
+            "sql_error_signal": false
+          },
+          "boolean_test": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "signals": [],
+          "boolean_response_difference": false,
+          "classification": "no_sql_injection_signal_observed",
+          "confirmed_vulnerability": false,
+          "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix",
+          "route_type": "prefix",
+          "expected_lab_label": "vulnerable",
+          "baseline": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "quote_test": {
+            "status_code": 400,
+            "sql_error_signal": false
+          },
+          "boolean_test": {
+            "status_code": 200,
+            "match_count": 2
+          },
+          "signals": [
+            "unexpected_match_count_increase"
+          ],
+          "boolean_response_difference": true,
+          "classification": "potential_sql_injection",
+          "confirmed_vulnerability": false,
+          "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+        },
+        {
+          "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix",
+          "route_type": "prefix",
+          "expected_lab_label": "secure",
+          "baseline": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "quote_test": {
+            "status_code": 200,
+            "sql_error_signal": false
+          },
+          "boolean_test": {
+            "status_code": 200,
+            "match_count": 0
+          },
+          "signals": [],
+          "boolean_response_difference": false,
+          "classification": "no_sql_injection_signal_observed",
+          "confirmed_vulnerability": false,
+          "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+        }
+      ],
+      "limitations": [
+        "Only fixed loopback training-lab routes are tested.",
+        "The detector uses heuristic response comparisons.",
+        "A missing signal does not prove a route is secure.",
+        "Expected lab labels are not independent ground truth.",
+        "No JavaScript or external targets are involved."
+      ]
+    }
+  },
+  "limitations": [
+    "This prototype is designed for the project's local lab.",
+    "SQLi checks use fixed lab routes rather than discovered arbitrary endpoints.",
+    "XSS checks use a harmless custom HTML tag and do not execute JavaScript.",
+    "Potential findings are heuristic signals, not confirmed vulnerabilities.",
+    "Evaluation labels describe the constructed lab and are not independent real-world validation.",
+    "GET requests can still have side effects on poorly designed applications.",
+    "A completed stage with request errors does not mean every route was tested."
+  ]
+}

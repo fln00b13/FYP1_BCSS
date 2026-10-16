@@ -1,0 +1,88 @@
+{
+  "scanner_version": "0.4",
+  "dataset": "test_cases.csv",
+  "case_count": 16,
+  "warning": "Interpret holdout results as held-out input performance on this lab, not independent validation on unrelated applications.",
+  "baseline": {
+    "all": {
+      "cases": 16,
+      "TP": 6,
+      "TN": 2,
+      "FP": 8,
+      "FN": 0,
+      "precision": 0.4286,
+      "recall": 1.0,
+      "specificity": 0.2,
+      "false_positive_rate": 0.8,
+      "accuracy": 0.5,
+      "f1": 0.6
+    },
+    "development": {
+      "cases": 10,
+      "TP": 4,
+      "TN": 1,
+      "FP": 5,
+      "FN": 0,
+      "precision": 0.4444,
+      "recall": 1.0,
+      "specificity": 0.1667,
+      "false_positive_rate": 0.8333,
+      "accuracy": 0.5,
+      "f1": 0.6153
+    },
+    "holdout": {
+      "cases": 6,
+      "TP": 2,
+      "TN": 1,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.4,
+      "recall": 1.0,
+      "specificity": 0.25,
+      "false_positive_rate": 0.75,
+      "accuracy": 0.5,
+      "f1": 0.5714
+    }
+  },
+  "improved": {
+    "all": {
+      "cases": 16,
+      "TP": 6,
+      "TN": 10,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1": 1.0
+    },
+    "development": {
+      "cases": 10,
+      "TP": 4,
+      "TN": 6,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1": 1.0
+    },
+    "holdout": {
+      "cases": 6,
+      "TP": 2,
+      "TN": 4,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1": 1.0
+    }
+  }
+}

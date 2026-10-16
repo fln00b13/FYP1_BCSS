@@ -1,0 +1,184 @@
+{
+  "scanner_version": "0.5.4",
+  "start_url": "http://127.0.0.1:5000/",
+  "tests_run": 5,
+  "errors": [],
+  "results": [
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 3.05
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 100,
+        "elapsed_ms": 1.99
+      },
+      "analysis": {
+        "raw_reflected": true,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": true,
+        "attribute_contexts": [],
+        "text_contexts": [],
+        "classification": "potential_html_injection",
+        "explanation": "The marker was parsed as an HTML element. This suggests raw HTML interpretation, but does not establish executable XSS.",
+        "confirmed_vulnerability": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 1.7
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 106,
+        "elapsed_ms": 2.08
+      },
+      "analysis": {
+        "raw_reflected": false,
+        "escaped_reflected": true,
+        "parsed_as_html_tag": false,
+        "attribute_contexts": [],
+        "text_contexts": [
+          {
+            "parent_element": "div"
+          }
+        ],
+        "classification": "escaped_reflection",
+        "explanation": "The escaped marker appears in the response, consistent with HTML output encoding.",
+        "confirmed_vulnerability": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 74,
+        "elapsed_ms": 2.09
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 83,
+        "elapsed_ms": 1.93
+      },
+      "analysis": {
+        "raw_reflected": true,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": false,
+        "attribute_contexts": [
+          {
+            "element": "input",
+            "attribute": "value"
+          }
+        ],
+        "text_contexts": [],
+        "classification": "raw_reflection_in_attribute",
+        "explanation": "The raw marker occurs in one or more HTML attribute values. Risk depends on the attribute and its context.",
+        "confirmed_vulnerability": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 74,
+        "elapsed_ms": 1.86
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 89,
+        "elapsed_ms": 18.2
+      },
+      "analysis": {
+        "raw_reflected": false,
+        "escaped_reflected": true,
+        "parsed_as_html_tag": false,
+        "attribute_contexts": [
+          {
+            "element": "input",
+            "attribute": "value"
+          }
+        ],
+        "text_contexts": [],
+        "classification": "escaped_reflection",
+        "explanation": "The escaped marker appears in the response, consistent with HTML output encoding.",
+        "confirmed_vulnerability": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 101,
+        "elapsed_ms": 15.69
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 101,
+        "elapsed_ms": 15.1
+      },
+      "analysis": {
+        "raw_reflected": false,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": false,
+        "attribute_contexts": [],
+        "text_contexts": [],
+        "classification": "not_reflected",
+        "explanation": "Neither the raw marker nor its escaped form was found in the response.",
+        "confirmed_vulnerability": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": false
+      },
+      "note": "Reflection analysis only. JavaScript execution and browser-level exploitability are not tested."
+    }
+  ],
+  "limitations": [
+    "Only discovered query parameters on /lab/xss/ routes are tested.",
+    "The marker is a harmless custom HTML tag.",
+    "Reflection classifications are not confirmed vulnerabilities.",
+    "JavaScript execution and browser behavior are not tested.",
+    "Only loopback HTTP targets are allowed."
+  ]
+}

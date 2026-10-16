@@ -1,0 +1,12 @@
+route,category,expected_vulnerable,label_rationale,split
+/lab/sqli/vulnerable,SQL injection,true,User input is concatenated into SQL,development
+/lab/sqli/secure,SQL injection,false,SQL uses parameterized input,development
+/lab/sqli/noisy,SQL injection,false,Database wording is present without vulnerable input handling,development
+/lab/sqli/vulnerable-prefix,SQL injection,true,User input is concatenated into a LIKE query,development
+/lab/sqli/secure-prefix,SQL injection,false,LIKE query uses a parameterized value,development
+/lab/sqli/secure-error,SQL injection,false,Generic SQL error wording is not evidence of injection,development
+/lab/xss/vulnerable,HTML output handling,true,User input is inserted as raw HTML,development
+/lab/xss/secure,HTML output handling,false,HTML special characters are escaped,development
+/lab/xss/vulnerable-attribute,HTML output handling,true,Unescaped quotation marks can break out of the attribute value,development
+/lab/xss/secure-attribute,HTML output handling,false,HTML attribute characters are escaped,development
+/lab/xss/no-reflection,HTML output handling,false,Input is not reflected in the response,development

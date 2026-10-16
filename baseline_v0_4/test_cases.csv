@@ -1,0 +1,17 @@
+case_id,route,category,probe_type,probe_value,marker,expected_vulnerable,label_rationale,split
+SQL01,/lab/sqli/vulnerable,SQL injection,sql_boolean,' OR '1'='1,,true,Unparameterized equality query can be changed by boolean input,development
+SQL02,/lab/sqli/secure,SQL injection,sql_boolean,' OR '1'='1,,false,Parameterized equality query treats input as data,development
+SQL03,/lab/sqli/vulnerable,SQL injection,sql_boolean,' OR 1=1 -- ,,true,Unparameterized equality query can be changed by a boolean condition,holdout
+SQL04,/lab/sqli/secure,SQL injection,sql_boolean,' OR 1=1 -- ,,false,Parameterized equality query treats input as data,holdout
+SQL05,/lab/sqli/noisy,SQL injection,sql_boolean,' OR '1'='1,,false,Generic database wording does not establish SQL injection,development
+SQL06,/lab/sqli/vulnerable-prefix,SQL injection,sql_boolean,' OR 1=1 -- ,,true,Unparameterized LIKE query can be changed by a boolean condition,development
+SQL07,/lab/sqli/secure-prefix,SQL injection,sql_boolean,' OR 1=1 -- ,,false,Parameterized LIKE query treats input as data,development
+SQL08,/lab/sqli/secure-error,SQL injection,sql_boolean,' OR '1'='1,,false,Generic SQL-related wording is not proof of a vulnerability,holdout
+XSS01,/lab/xss/vulnerable,HTML output handling,html_tag,<FPTK_HTML_A>,FPTK_HTML_A,true,Input is inserted into the HTML response without escaping,development
+XSS02,/lab/xss/secure,HTML output handling,html_tag,<FPTK_HTML_A>,FPTK_HTML_A,false,HTML special characters are escaped before reflection,development
+XSS03,/lab/xss/vulnerable,HTML output handling,html_tag,<FPTK_HTML_B>,FPTK_HTML_B,true,Second marker tests raw HTML reflection with a different input,holdout
+XSS04,/lab/xss/secure,HTML output handling,html_tag,<FPTK_HTML_B>,FPTK_HTML_B,false,Second marker should remain HTML-escaped,holdout
+XSS05,/lab/xss/vulnerable-attribute,HTML output handling,attribute,FPTK_ATTR_A" data-fptk="probe,FPTK_ATTR_A,true,Unescaped quotation marks can create an injected HTML attribute,development
+XSS06,/lab/xss/secure-attribute,HTML output handling,attribute,FPTK_ATTR_A" data-fptk="probe,FPTK_ATTR_A,false,Attribute value is escaped including quotation marks,development
+XSS07,/lab/xss/no-reflection,HTML output handling,no_reflection,FPTK_NONE_A,FPTK_NONE_A,false,Input is not reflected into the response,development
+XSS08,/lab/xss/no-reflection,HTML output handling,no_reflection,FPTK_NONE_B,FPTK_NONE_B,false,Second unreflected marker checks the same control with a different input,holdout

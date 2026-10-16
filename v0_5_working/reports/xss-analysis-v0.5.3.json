@@ -1,0 +1,75 @@
+{
+  "scanner_version": "0.5.3",
+  "start_url": "http://127.0.0.1:5000/",
+  "tests_run": 2,
+  "errors": [],
+  "results": [
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 2.93
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 100,
+        "elapsed_ms": 1.93,
+        "marker": "<FPTK_XSS_A91>"
+      },
+      "analysis": {
+        "raw_reflected": true,
+        "escaped_reflected": false,
+        "parsed_as_html_tag": true,
+        "classification": "potential_html_injection",
+        "explanation": "The marker appears as a parsed HTML element. This is evidence of raw HTML interpretation, not proof of executable XSS."
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "confirmed_vulnerability": false,
+      "note": "This is a reflection-analysis result, not a confirmed XSS finding. Browser execution and the exact output context have not been validated."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 24.34
+      },
+      "test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 106,
+        "elapsed_ms": 1.92,
+        "marker": "<FPTK_XSS_A91>"
+      },
+      "analysis": {
+        "raw_reflected": false,
+        "escaped_reflected": true,
+        "parsed_as_html_tag": false,
+        "classification": "escaped_reflection",
+        "explanation": "The marker appears HTML-escaped in the response. This is consistent with output encoding."
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "confirmed_vulnerability": false,
+      "note": "This is a reflection-analysis result, not a confirmed XSS finding. Browser execution and the exact output context have not been validated."
+    }
+  ],
+  "limitations": [
+    "Only discovered query parameters on /lab/xss/ routes are tested.",
+    "The probe uses a harmless custom HTML tag.",
+    "Raw reflection is not proof of executable XSS.",
+    "JavaScript execution is not tested.",
+    "Only local loopback HTTP targets are allowed."
+  ]
+}

@@ -1,0 +1,12 @@
+route,category,expected_vulnerable,baseline_prediction,improved_prediction,baseline_correct,improved_correct,label_rationale,split,baseline_evidence,improved_evidence
+/lab/sqli/vulnerable,SQL injection,True,True,True,True,True,User input is concatenated into SQL,development,Broad keyword match found,behaviour_change=True; database_error_signature=False
+/lab/sqli/secure,SQL injection,False,True,False,False,True,SQL uses parameterized input,development,Broad keyword match found,behaviour_change=False; database_error_signature=False
+/lab/sqli/noisy,SQL injection,False,True,False,False,True,Database wording is present without vulnerable input handling,development,Broad keyword match found,behaviour_change=False; database_error_signature=False
+/lab/sqli/vulnerable-prefix,SQL injection,True,True,True,True,True,User input is concatenated into a LIKE query,development,Broad keyword match found,behaviour_change=True; database_error_signature=False
+/lab/sqli/secure-prefix,SQL injection,False,True,False,False,True,LIKE query uses a parameterized value,development,Broad keyword match found,behaviour_change=False; database_error_signature=False
+/lab/sqli/secure-error,SQL injection,False,True,False,False,True,Generic SQL error wording is not evidence of injection,development,Broad keyword match found,behaviour_change=False; database_error_signature=False
+/lab/xss/vulnerable,HTML output handling,True,True,True,True,True,User input is inserted as raw HTML,development,Input marker reflected in response,raw_probe_present=True; escaped_probe_present=False
+/lab/xss/secure,HTML output handling,False,True,False,False,True,HTML special characters are escaped,development,Input marker reflected in response,raw_probe_present=False; escaped_probe_present=True
+/lab/xss/vulnerable-attribute,HTML output handling,True,True,True,True,True,Unescaped quotation marks can break out of the attribute value,development,Input marker reflected in response,active_injected_attribute=True; escaped_quotes_present=False
+/lab/xss/secure-attribute,HTML output handling,False,True,False,False,True,HTML attribute characters are escaped,development,Input marker reflected in response,active_injected_attribute=False; escaped_quotes_present=True
+/lab/xss/no-reflection,HTML output handling,False,False,False,True,True,Input is not reflected in the response,development,Input marker not found,Control route does not intentionally reflect input

@@ -1,0 +1,130 @@
+{
+  "evaluation_version": "0.5.6",
+  "input_reports": {
+    "xss": "C:\\Users\\User\\Desktop\\webapp_fptk_starter\\v0_5_working\\reports\\xss-analysis-v0.5.7.json",
+    "sqli": "C:\\Users\\User\\Desktop\\webapp_fptk_starter\\v0_5_working\\reports\\sqli-analysis-v0.5.7.json"
+  },
+  "reference_label_source": "Known labels for the project's constructed local training lab",
+  "overall_metrics": {
+    "total": 9,
+    "true_positives": 4,
+    "false_positives": 0,
+    "true_negatives": 5,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "false_positive_rate": 0.0,
+    "accuracy": 1.0,
+    "f1_score": 1.0
+  },
+  "category_metrics": {
+    "XSS": {
+      "total": 5,
+      "true_positives": 2,
+      "false_positives": 0,
+      "true_negatives": 3,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1_score": 1.0
+    },
+    "SQLi": {
+      "total": 4,
+      "true_positives": 2,
+      "false_positives": 0,
+      "true_negatives": 2,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "f1_score": 1.0
+    }
+  },
+  "test_details": [
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "expected": "vulnerable",
+      "predicted": "vulnerable",
+      "classification": "potential_html_injection",
+      "correct": true
+    },
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+      "expected": "secure",
+      "predicted": "secure",
+      "classification": "escaped_reflection",
+      "correct": true
+    },
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+      "expected": "vulnerable",
+      "predicted": "vulnerable",
+      "classification": "raw_reflection_in_attribute",
+      "correct": true
+    },
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+      "expected": "secure",
+      "predicted": "secure",
+      "classification": "escaped_reflection",
+      "correct": true
+    },
+    {
+      "category": "XSS",
+      "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+      "expected": "secure",
+      "predicted": "secure",
+      "classification": "not_reflected",
+      "correct": true
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable",
+      "expected": "vulnerable",
+      "predicted": "vulnerable",
+      "classification": "potential_sql_injection",
+      "correct": true
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/secure",
+      "expected": "secure",
+      "predicted": "secure",
+      "classification": "no_sql_injection_signal_observed",
+      "correct": true
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix",
+      "expected": "vulnerable",
+      "predicted": "vulnerable",
+      "classification": "potential_sql_injection",
+      "correct": true
+    },
+    {
+      "category": "SQLi",
+      "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix",
+      "expected": "secure",
+      "predicted": "secure",
+      "classification": "no_sql_injection_signal_observed",
+      "correct": true
+    }
+  ],
+  "limitations": [
+    "This is a small, hand-built local lab evaluation.",
+    "Reference labels are not independent real-world validation.",
+    "Unknown XSS routes are excluded rather than assigned guessed labels.",
+    "A detector classification is a heuristic, not proof of exploitability.",
+    "These results are not directly comparable to v0.4 unless the same cases, labels, and evaluation rules are used."
+  ]
+}

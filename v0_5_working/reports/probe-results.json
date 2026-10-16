@@ -1,0 +1,128 @@
+{
+  "scanner_version": "0.5.2",
+  "target": "http://127.0.0.1:5000/",
+  "result_count": 5,
+  "results": [
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 48,
+        "elapsed_ms": 3.51
+      },
+      "marker_test": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 41,
+        "elapsed_ms": 3.57,
+        "marker_reflected": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "classification": "baseline_observation_only",
+      "note": "Reflection or response changes alone do not prove SQL injection or cross-site scripting."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/secure?term=alice",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 44,
+        "elapsed_ms": 15.23
+      },
+      "marker_test": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 37,
+        "elapsed_ms": 3.1,
+        "marker_reflected": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "classification": "baseline_observation_only",
+      "note": "Reflection or response changes alone do not prove SQL injection or cross-site scripting."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/noisy?term=alice",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 74,
+        "elapsed_ms": 2.46
+      },
+      "marker_test": {
+        "status_code": 200,
+        "content_type": "application/json",
+        "body_length": 74,
+        "elapsed_ms": 23.35,
+        "marker_reflected": false
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": false
+      },
+      "classification": "baseline_observation_only",
+      "note": "Reflection or response changes alone do not prove SQL injection or cross-site scripting."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 2.79
+      },
+      "marker_test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 108,
+        "elapsed_ms": 12.7,
+        "marker_reflected": true
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "classification": "baseline_observation_only",
+      "note": "Reflection or response changes alone do not prove SQL injection or cross-site scripting."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+      "parameter": "term",
+      "baseline": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 91,
+        "elapsed_ms": 2.45
+      },
+      "marker_test": {
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "body_length": 108,
+        "elapsed_ms": 12.29,
+        "marker_reflected": true
+      },
+      "evidence": {
+        "status_changed": false,
+        "body_length_changed": true
+      },
+      "classification": "baseline_observation_only",
+      "note": "Reflection or response changes alone do not prove SQL injection or cross-site scripting."
+    }
+  ],
+  "limitations": [
+    "Only URLs and parameters already present in discovery output are tested.",
+    "Only harmless marker inputs are used.",
+    "Response differences and reflection are observations, not vulnerability proof.",
+    "Only local loopback HTTP targets are allowed."
+  ]
+}

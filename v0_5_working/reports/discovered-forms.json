@@ -1,0 +1,23 @@
+{
+  "scanner_version": "0.5-discovery",
+  "target": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice",
+  "result_count": 1,
+  "results": [
+    {
+      "kind": "json_endpoint",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice",
+      "method": "GET",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "response_type": "json",
+      "json_keys": [
+        "matches",
+        "route"
+      ]
+    }
+  ]
+}

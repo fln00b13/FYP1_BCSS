@@ -1,0 +1,107 @@
+{
+  "scanner_version": "0.5.5",
+  "target": "http://127.0.0.1:5000",
+  "tests_run": 4,
+  "errors": [],
+  "results": [
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable",
+      "route_type": "equality",
+      "expected_lab_label": "vulnerable",
+      "baseline": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "quote_test": {
+        "status_code": 400,
+        "sql_error_signal": false
+      },
+      "boolean_test": {
+        "status_code": 200,
+        "match_count": 2
+      },
+      "signals": [
+        "unexpected_match_count_increase"
+      ],
+      "boolean_response_difference": true,
+      "classification": "potential_sql_injection",
+      "confirmed_vulnerability": false,
+      "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/secure",
+      "route_type": "equality",
+      "expected_lab_label": "secure",
+      "baseline": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "quote_test": {
+        "status_code": 200,
+        "sql_error_signal": false
+      },
+      "boolean_test": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "signals": [],
+      "boolean_response_difference": false,
+      "classification": "no_sql_injection_signal_observed",
+      "confirmed_vulnerability": false,
+      "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix",
+      "route_type": "prefix",
+      "expected_lab_label": "vulnerable",
+      "baseline": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "quote_test": {
+        "status_code": 400,
+        "sql_error_signal": false
+      },
+      "boolean_test": {
+        "status_code": 200,
+        "match_count": 2
+      },
+      "signals": [
+        "unexpected_match_count_increase"
+      ],
+      "boolean_response_difference": true,
+      "classification": "potential_sql_injection",
+      "confirmed_vulnerability": false,
+      "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix",
+      "route_type": "prefix",
+      "expected_lab_label": "secure",
+      "baseline": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "quote_test": {
+        "status_code": 200,
+        "sql_error_signal": false
+      },
+      "boolean_test": {
+        "status_code": 200,
+        "match_count": 0
+      },
+      "signals": [],
+      "boolean_response_difference": false,
+      "classification": "no_sql_injection_signal_observed",
+      "confirmed_vulnerability": false,
+      "note": "Heuristic result only. Response differences and SQL errors can have other causes; review against the known lab implementation and labelled test cases."
+    }
+  ],
+  "limitations": [
+    "Only fixed loopback training-lab routes are tested.",
+    "The detector uses heuristic response comparisons.",
+    "A missing signal does not prove a route is secure.",
+    "Expected lab labels are not independent ground truth.",
+    "No JavaScript or external targets are involved."
+  ]
+}

@@ -1,0 +1,10 @@
+﻿category,url,expected,predicted,classification,correct
+XSS,http://127.0.0.1:5000/lab/xss/vulnerable?term=hello,vulnerable,vulnerable,potential_html_injection,True
+XSS,http://127.0.0.1:5000/lab/xss/secure?term=hello,secure,secure,escaped_reflection,True
+XSS,http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello,vulnerable,vulnerable,raw_reflection_in_attribute,True
+XSS,http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello,secure,secure,escaped_reflection,True
+XSS,http://127.0.0.1:5000/lab/xss/no-reflection?term=hello,secure,secure,not_reflected,True
+SQLi,http://127.0.0.1:5000/lab/sqli/vulnerable,vulnerable,vulnerable,potential_sql_injection,True
+SQLi,http://127.0.0.1:5000/lab/sqli/secure,secure,secure,no_sql_injection_signal_observed,True
+SQLi,http://127.0.0.1:5000/lab/sqli/vulnerable-prefix,vulnerable,vulnerable,potential_sql_injection,True
+SQLi,http://127.0.0.1:5000/lab/sqli/secure-prefix,secure,secure,no_sql_injection_signal_observed,True

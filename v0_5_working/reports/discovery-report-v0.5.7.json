@@ -1,0 +1,189 @@
+{
+  "scanner_version": "0.5.1",
+  "start_url": "http://127.0.0.1:5000/",
+  "pages_visited": 11,
+  "page_count": 11,
+  "form_count": 0,
+  "link_count": 5,
+  "pages": [
+    {
+      "url": "http://127.0.0.1:5000/",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "hello"
+        }
+      ],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "hello"
+        }
+      ],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable-attribute?term=hello",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "hello"
+        }
+      ],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/secure-attribute?term=hello",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "hello"
+        }
+      ],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/xss/no-reflection?term=hello",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "hello"
+        }
+      ],
+      "kind": "html_page"
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice",
+      "status_code": 200,
+      "content_type": "application/json",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "kind": "json_endpoint",
+      "json_keys": [
+        "matches",
+        "route"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/secure?term=alice",
+      "status_code": 200,
+      "content_type": "application/json",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "kind": "json_endpoint",
+      "json_keys": [
+        "matches",
+        "route"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable-prefix?term=alice",
+      "status_code": 200,
+      "content_type": "application/json",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "kind": "json_endpoint",
+      "json_keys": [
+        "matches",
+        "route"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/secure-prefix?term=alice",
+      "status_code": 200,
+      "content_type": "application/json",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "kind": "json_endpoint",
+      "json_keys": [
+        "matches",
+        "route"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5000/lab/sqli/noisy?term=alice",
+      "status_code": 200,
+      "content_type": "application/json",
+      "query_parameters": [
+        {
+          "name": "term",
+          "value": "alice"
+        }
+      ],
+      "kind": "json_endpoint",
+      "json_keys": [
+        "message",
+        "results"
+      ]
+    }
+  ],
+  "forms": [],
+  "links": [
+    {
+      "source": "http://127.0.0.1:5000/",
+      "url": "http://127.0.0.1:5000/lab/sqli/vulnerable?term=alice"
+    },
+    {
+      "source": "http://127.0.0.1:5000/",
+      "url": "http://127.0.0.1:5000/lab/sqli/secure?term=alice"
+    },
+    {
+      "source": "http://127.0.0.1:5000/",
+      "url": "http://127.0.0.1:5000/lab/sqli/noisy?term=alice"
+    },
+    {
+      "source": "http://127.0.0.1:5000/",
+      "url": "http://127.0.0.1:5000/lab/xss/vulnerable?term=hello"
+    },
+    {
+      "source": "http://127.0.0.1:5000/",
+      "url": "http://127.0.0.1:5000/lab/xss/secure?term=hello"
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Only pages reachable through HTML links are crawled automatically.",
+    "Unlinked endpoints must be supplied as route seeds.",
+    "Forms are recorded but never submitted.",
+    "Only GET requests are sent.",
+    "Redirects are not followed.",
+    "Discovery does not confirm vulnerabilities."
+  ]
+}
